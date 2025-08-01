@@ -1,0 +1,19 @@
+@function pTE($px-value, $base-font-size: 16px) {
+  @return calc($px-value / $base-font-size * 1em);
+}
+
+@function pTR($px-value, $base-font-size: 16px) {
+  @return calc(#{$px-value} / #{$base-font-size} * 1rem);
+}
+
+@function gradient($start-color, $end-color, $angle: 90deg) {
+  @return linear-gradient($angle, $start-color, $end-color);
+}
+
+@function contrast-color($color) {
+  @if (lightness($color) > 50%) {
+    @return black;
+  } @else {
+    @return white;
+  }
+}

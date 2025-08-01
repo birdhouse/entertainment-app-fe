@@ -1,0 +1,46 @@
+.navBar {
+  width: 8%;
+  min-width: 80px;
+  height: 90%;
+  @include flex(column, sb, ce, sp8);
+
+  background-color: var(--navBg);
+  border-radius: 20px;
+
+  padding: 32px 28px;
+
+  @include responsive(medium) {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .navIconsAll {
+    @include flex(column, fs, ce, sp7);
+    @include responsive(medium) {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 63%;
+    }
+
+    .navIcons {
+      @include flex(column, fs, ce, sp9);
+
+      @include responsive(medium) {
+        flex-direction: row;
+      }
+    }
+  }
+
+  .navProfile {
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 2px;
+    padding-left: 3px;
+    @include flex(row, ce, ce, sp0);
+
+    img {
+      width: 46px;
+      height: 46px;
+    }
+  }
+}

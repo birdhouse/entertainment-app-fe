@@ -1,0 +1,21 @@
+@use "../abstracts/index" as *;
+
+// Apply themes dynamically
+@each $theme, $values in $themes {
+  html {
+    content: "theme";
+    // Generates .theme-light and .theme-dark
+    @each $property, $value in $values {
+      #{$property}: #{$value}; // Outputs CSS variables
+    }
+  }
+}
+// @each $theme, $values in $themes {
+//   .theme-#{$theme} {
+//     content: "theme";
+//     // Generates .theme-light and .theme-dark
+//     @each $property, $value in $values {
+//       #{$property}: #{$value}; // Outputs CSS variables
+//     }
+//   }
+// }

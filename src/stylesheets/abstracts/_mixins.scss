@@ -1,0 +1,233 @@
+//@use "variables" as *;
+@use "variables" as *;
+@use "functions" as *;
+
+// Shorthand maps for justify-content and align-items
+$jc-shorthand: (
+  "fs": "flex-start",
+  "fe": "flex-end",
+  "ce": "center",
+  "sb": "space-between",
+  "sa": "space-around",
+  "se": "space-evenly",
+);
+
+$ai-shorthand: (
+  "fs": "flex-start",
+  "fe": "flex-end",
+  "ce": "center",
+  "ba": "baseline",
+  "st": "stretch",
+);
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Display
+@mixin flex($direction: row, $jc: fs, $ai: ce, $g: sp4) {
+  // Apply flex-direction
+  display: flex;
+  flex-direction: $direction;
+
+  // Apply justify-content, using shorthand if passed
+  justify-content: #{map-get($jc-shorthand, $jc)};
+
+  // Apply align-items, using shorthand if passed
+  align-items: #{map-get($ai-shorthand, $ai)};
+
+  // Apply gap (if provided)
+  gap: get($spacing, $g);
+}
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin grid($columns: 2, $fr: 1fr, $gap: 1rem) {
+  display: grid;
+  grid-template-columns: repeat($columns, $fr);
+  gap: $gap;
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Position
+@mixin absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Typography
+@mixin typography3($element, $weight, $line, $color, $min, $pref, $max) {
+  font-size: unquote($string: "clamp(#{$min}, #{$pref}, #{$max})");
+  font-weight: $weight;
+  line-height: $line;
+  color: var($color);
+}
+
+// --- Universal Typography Mixin ---
+@mixin smartTypography($settings) {
+  $heading: map-get($settings, heading);
+  $color: map-get($settings, color);
+
+  font-size: clamp(#{getFontResponsive($heading)}, 5vw, #{getFont($heading)});
+  font-weight: map-get($settings, weight);
+  line-height: map-get($settings, line);
+  color: var(#{$color});
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Button Mixin
+@mixin button($bg-color, $text-color, $padding, $radius) {
+  background-color: var($bg-color);
+  color: var($text-color);
+  padding: $padding;
+  border-radius: $radius;
+  border: none;
+
+  &:hover {
+    background-color: darken(getColor(primary), 10%);
+  }
+
+  &:active {
+    background-color: darken(getColor(primary), 10%);
+  }
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Input States
+@mixin input-field() {
+  @extend %full-size;
+  padding: getPadding(ip);
+  font-size: getFont(body1);
+  color: var(--input-color);
+  border: none;
+  background-color: transparent;
+  outline: none;
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+
+  &::placeholder {
+    color: var(--placeholder-color);
+  }
+}
+
+@mixin input-container($template) {
+  // Apply base styles
+  @each $prop, $value in map-get($inputTemplates, $template) {
+    @if type-of($value) != "map" {
+      #{$prop}: #{inspect($value)}; // Ensure proper CSS formatting
+    }
+  }
+
+  // Apply state-specific styles (hover, has(input:focus), etc.)
+  @each $state, $stateStyles in map-get($inputTemplates, $template) {
+    @if type-of($stateStyles) == "map" {
+      &#{$state} {
+        @each $prop, $value in $stateStyles {
+          #{$prop}: #{inspect($value)};
+        }
+      }
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Gradient
+@mixin gradient($direction, $colors...) {
+  background: linear-gradient($direction, $colors);
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Responsive Mixin
+@mixin responsive($breakpoint) {
+  @if $breakpoint == small {
+    @media (max-width: 576px) {
+      @content;
+    }
+  } @else if $breakpoint == medium {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $breakpoint == large {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+}
+
+// Scrollbar
+@mixin scrollbar($width: 8px, $color: #ccc, $thumb: #888) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: 10px;
+  }
+}
+
+// Background image
+@mixin bg-image($image, $size: cover, $position: center, $repeat: no-repeat, $attachment: scroll) {
+  background-image: url(#{$image});
+  background-size: $size;
+  background-position: $position;
+  background-repeat: $repeat;
+  background-attachment: $attachment;
+}
+
+// Link style
+@mixin link-style {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+
+  &:visited {
+    color: var(--visited-color);
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--hover-color);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: var(--active-color);
+  }
+}
+
+// Bullet style
+@mixin custom-bullet {
+  &::before {
+    content: url(../images/icon-check.svg);
+    display: inline-block;
+    margin-right: 16px;
+  }
+}

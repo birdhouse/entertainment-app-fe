@@ -1,0 +1,14 @@
+@use "../abstracts/index" as *;
+
+// @each $element, $key in $fontSizes {
+//   .#{$element} {
+//     @include typography3(getType($element)...);
+//   }
+// }
+
+// --- Apply Styles ---
+@each $element, $settings in $fontSizes {
+  .#{$element} {
+    @include smartTypography($settings);
+  }
+}

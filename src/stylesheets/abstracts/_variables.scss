@@ -1,0 +1,212 @@
+// --- Generic Utility Function ---
+@function get($map, $key) {
+  @return map-get($map, $key);
+}
+
+// --- Typography Functions ---
+// @function getType($element) {
+//   @return (
+//     $element,
+//     get($fontSizes, $element, weight),
+//     get($fontSizes, $element, line),
+//     get($fontSizes, $element, color),
+//     get($fontSizes, $element, min),
+//     get($fontSizes, $element, pref),
+//     get($fontSizes, $element, max)
+//   );
+// }
+
+@function getFont($key) {
+  @return get($fontSizesBase, $key);
+}
+@function getFontResponsive($key) {
+  @return get($fontSizesResponsive, $key);
+}
+
+// --- Font Sizes Base Map ---
+$fontSizesBase: (
+  // heading0: 64px,
+  heading1: 32px,
+  heading2m: 24px,
+  heading2l: 24px,
+  heading3: 18px,
+  heading4: 15px,
+  heading5: 13px,
+  heading6: 11px,
+  // heading7: 20px,
+  //
+  //
+  // body1: 18px,
+  // body2: 16px,
+  // body3: 14px,
+  // body4: 12px,
+  // body5: 10px,
+);
+
+$fontSizesResponsive: (
+  // heading0: 48px,
+  heading1: 20px,
+  heading2m: 16px,
+  heading2l: 16px,
+  heading3: 15px,
+  heading4: 14px,
+  heading5: 12px,
+  heading6: 11px,
+  // heading7: 20px,
+  //
+  //
+  // body1: 18px,
+  // body2: 16px,
+  // body3: 14px,
+  // body4: 12px,
+  // body5: 10px,
+);
+
+// --- Spacing Map & Shorthands ---
+$spacing: (
+  sp0: 0px,
+  sp1: 184px,
+  sp2: 176px,
+  sp3: 160px,
+  sp4: 128px,
+  sp5: 104px,
+  sp6: 80px,
+  sp7: 56px,
+  sp8: 32px,
+  sp9: 24px,
+  sp9_1: 20px,
+  sp10: 16px,
+  sp11: 8px,
+  sp12: 40px,
+  sp13: 72px,
+);
+
+$paddingCombos: (
+  // ip: get($spacing, sp7) get($spacing, sp4),
+  // cp: get($spacing, sp1),
+  // bp: get($spacing, sp9_1)
+);
+
+$paddings: (
+  // ip: map-get($paddingCombos, ip),
+  // cp: map-get($paddingCombos, cp),
+  // bp: map-get($paddingCombos, bp)
+);
+
+// --- Radius ---
+$radius: (
+  rd1: 16px,
+  rd2: 8px,
+);
+
+// --- Colors ---
+$colors: (
+  //
+  Red500: #fc4747,
+  Blue500: #5a698f,
+  Blue900: #161d2f,
+  Blue950: #10141e,
+  white0: #fff,
+  black0: #000
+);
+
+// --- Themes ---
+$themeBase: (
+  // --primary: get($colors, primary),
+  --btnPrimary: get($colors, Red500),
+  --btnPrimaryHover: get($colors, white0),
+  //
+  --appBackground: get($colors, Blue950),
+  //
+  --error: get($colors, Red500),
+  //
+  --textPreset: get($colors, white0)
+);
+
+$themes: (
+  light:
+    map-merge(
+      $themeBase,
+      (
+        --loginBg: get($colors, Blue900),
+        --inputPh: hsl(0, 0%, 50%),
+        --inputBorder: get($colors, Blue500),
+        //
+        --navBg: get($colors, Blue900),
+        --navIconBg: get($colors, Blue500),
+        --navIconBgActive: get($colors, white0),
+        //
+        --btnText: get($colors, white0),
+        --signUpText: get($colors, Red500),
+        //
+        --bookmarkBg: rgba(16, 20, 30, 0.5),
+        --bookmarkColor: get($colors, white0),
+        //
+        --cardLabelColor: rgba(255, 255, 255, 0.75),
+      )
+    ),
+  // dark:
+  //   map-merge(
+  //     $themeBase,
+  //     (
+  //       --editorBg: get($colors, grey1),
+  //       --deleteBg: get($colors, grey9),
+  //       --vaultOptionBg: get($colors, grey8),
+  //       --vaultOptionClr: get($colors, grey2),
+  //       --editorText: get($colors, neutral),
+  //       --editorTabBg: get($colors, grey9),
+  //       --markdownCol: get($colors, grey4),
+  //       --editorLabel: get($colors, grey5),
+  //       --preH: get($colors, neutral),
+  //       --preP: get($colors, grey4),
+  //       --blocBg: get($colors, grey5),
+  //       --divider: get($colors, grey6),
+  //     )
+  //   ),,,,
+);
+
+// --- Font Sizes Map ---
+$fontSizes: (
+  heading1: (
+    heading: heading1,
+    color: --textPreset,
+    weight: 300,
+    line: 100%,
+  ),
+  heading2m: (
+    heading: heading2,
+    color: --textPreset,
+    weight: 600,
+    line: 100%,
+  ),
+  heading2l: (
+    heading: heading2,
+    color: --textPreset,
+    weight: 300,
+    line: 100%,
+  ),
+  heading3: (
+    heading: heading3,
+    color: --textPreset,
+    weight: 600,
+    line: 100%,
+  ),
+  heading4: (
+    heading: heading4,
+    color: --textPreset,
+    weight: 300,
+    line: 100%,
+  ),
+  heading5: (
+    heading: heading5,
+    color: --textPreset,
+    weight: 300,
+    line: 100%,
+  ),
+  heading6: (
+    heading: heading6,
+    color: --textPreset6,
+    weight: 300,
+    line: 100%,
+  ),
+);

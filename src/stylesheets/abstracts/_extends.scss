@@ -1,0 +1,91 @@
+@use "./variables";
+@use "./functions";
+
+/* Makes the element take up the full width and height of its container */
+%full-size {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensures images scale proportionally within their containers */
+%responsive-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevents text overflow by truncating with an ellipsis (...) */
+%text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Makes an element cover the entire screen (useful for overlays, modals, or full-screen sections) */
+%fixed-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Ensures images or elements are perfectly circular (useful for avatars) */
+%circle-img {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* Creates a responsive container with a max width, centered on the page */
+%responsive-container {
+  max-width: 1110px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Ensures the element stays on top of all other elements */
+%z-index-top {
+  z-index: 9999;
+}
+
+/* Places the element in a middle layer in terms of stacking */
+%z-index-middle {
+  z-index: 10;
+}
+
+/* Keeps the element behind most other elements */
+%z-index-low {
+  z-index: 1;
+}
+
+/* Applies a semi-transparent blurred background effect (useful for glassmorphism UI) */
+%blurred-background {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Defines a standard card layout with rounded corners, padding, and shadow */
+%card {
+  background: var(--background);
+  border-radius: getRadius(rd1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: getPadding(cp);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Adds a hover effect to cards, making them lift slightly when hovered */
+%card-hover {
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+/* Defines a reusable button style with padding, rounded corners, and hover transitions */
+%btn {
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}

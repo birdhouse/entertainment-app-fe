@@ -1,0 +1,14 @@
+/* _fonts.scss */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url(../../assets/fonts/JetBrainsMono-VariableFont_wght.ttf) format("truetype");
+  font-weight: 400 700; /* Range for wght axis */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url(../../assets/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf) format("truetype");
+  font-weight: 400 700; /* Range for wght axis */
+  font-style: italic;
+}

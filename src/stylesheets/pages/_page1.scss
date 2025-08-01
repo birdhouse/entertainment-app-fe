@@ -1,0 +1,18 @@
+@use "../abstracts/index" as *;
+
+html {
+  overflow-x: hidden !important;
+}
+
+body {
+  width: 100%;
+  height: max-content;
+  background-color: var(--appBackground);
+  padding: 32px;
+}
+
+#root {
+  width: 100%;
+}
+
+// ///////////////////////////////////
