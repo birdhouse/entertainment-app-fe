@@ -1,0 +1,42 @@
+.auth {
+  @include flex(column, fs, fs, sp8);
+}
+
+.inputAllCont {
+  @include flex(column, fs, fs, sp8);
+  width: 100%;
+  padding: 32px;
+  .inputCont {
+    width: inherit;
+    border-bottom: 1px solid #5a698f;
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid #5a698f;
+    }
+    input {
+      width: inherit;
+
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 14px;
+      caret-color: #ff0000;
+      padding: 8px;
+
+      &::placeholder {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      &:focus {
+        outline: none;
+
+        &::placeholder {
+          color: transparent;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}

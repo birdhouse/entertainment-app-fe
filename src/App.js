@@ -8,12 +8,13 @@ import HomeLayout from "./layouts/HomeLayout";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Bookmarked from "./pages/Bookmarked";
 import HomeLayoutInner from "./layouts/HomeLayoutInner";
+import LoginLayout from "./layouts/LoginLayout";
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/signin" element={<h1>Sign In</h1>} />
+        <Route path="/signin" element={<LoginLayout />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<HomeLayout />}>
             <Route element={<HomeLayoutInner />}>

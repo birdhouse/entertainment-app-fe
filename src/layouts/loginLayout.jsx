@@ -1,7 +1,13 @@
 import React from "react";
+import Authenticator from "../components/authenticator/Authenticator";
+import styles from "./loginLayout.module.scss";
 
-const loginLayout = () => {
-  return <div></div>;
+const LoginLayout = () => {
+  return (
+    <section className={styles.login}>
+      <Authenticator />
+    </section>
+  );
 };
 
-export default loginLayout;
+export default LoginLayout;
