@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGetTrendingQuery } from "../../features/tmdbApi/tmdbApi";
 import TrendingCard from "../trendingCard/TrendingCard";
 import styles from "./trending.module.scss";
@@ -12,18 +12,61 @@ const Trending = () => {
   });
 
   const scrollRef = useRef();
+  const cardRef = useRef(null);
+  const [cardWidth, setCardWidth] = useState(0);
 
-  // Clone first and last few items to fake infinite
+  const realCount = data?.results?.length || 0;
+
   const getClonedItems = () => {
     if (!data?.results) return [];
     const items = data.results;
     return [...items.slice(-CLONE_COUNT), ...items, ...items.slice(0, CLONE_COUNT)];
   };
   const items = getClonedItems();
-  const cardWidth = 500 + 32;
-  const realCount = data?.results?.length || 0;
 
-  // drag scroll
+  // Dynamically get card width (responsive)
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+
+    const updateWidth = () => {
+      const gap = 24; // same as SCSS gap
+      const width = el.getBoundingClientRect().width;
+      setCardWidth(width + gap);
+    };
+
+    updateWidth();
+
+    const resizeObserver = new ResizeObserver(updateWidth);
+    resizeObserver.observe(el);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  // Set initial scroll to fake-start
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el && cardWidth && realCount) {
+      el.scrollLeft = cardWidth * CLONE_COUNT;
+    }
+  }, [cardWidth, realCount]);
+
+  // Infinite scroll boundaries
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el || !cardWidth || !realCount) return;
+
+    const totalRealWidth = cardWidth * realCount;
+    const scrollLeft = el.scrollLeft;
+
+    if (scrollLeft <= 0) {
+      el.scrollLeft = totalRealWidth;
+    } else if (scrollLeft >= totalRealWidth + CLONE_COUNT * cardWidth) {
+      el.scrollLeft = cardWidth * CLONE_COUNT;
+    }
+  };
+
+  // Drag scroll (mouse + touch)
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -32,7 +75,6 @@ const Trending = () => {
     let startX = 0;
     let scrollLeft = 0;
 
-    // Mouse Events
     const onMouseDown = (e) => {
       isDragging = true;
       el.classList.add(styles.dragging);
@@ -53,7 +95,6 @@ const Trending = () => {
       el.classList.remove(styles.dragging);
     };
 
-    // Touch Events
     const onTouchStart = (e) => {
       isDragging = true;
       el.classList.add(styles.dragging);
@@ -73,7 +114,6 @@ const Trending = () => {
       el.classList.remove(styles.dragging);
     };
 
-    // Attach
     el.addEventListener("mousedown", onMouseDown);
     el.addEventListener("mousemove", onMouseMove);
     el.addEventListener("mouseup", onMouseUp);
@@ -95,50 +135,64 @@ const Trending = () => {
     };
   }, []);
 
-  // Set initial scroll
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (el && realCount) {
-      el.scrollLeft = cardWidth * CLONE_COUNT;
-    }
-  }, [realCount]);
+  // Wheel scroll enhancement
+  // useEffect(() => {
+  //   const el = scrollRef.current;
+  //   if (!el) return;
 
+  //   const handleWheel = (e) => {
+  //     if (e.deltaY !== 0) {
+  //       e.preventDefault();
+  //       const scrollAmount = e.deltaY * 1.5;
+  //       el.scrollBy({ left: scrollAmount, behavior: "auto" });
+  //     }
+  //   };
+
+  //   el.addEventListener("wheel", handleWheel, { passive: false });
+  //   return () => el.removeEventListener("wheel", handleWheel);
+  // }, []);
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
-    const handleWheel = (e) => {
-      if (e.deltaY !== 0) {
-        e.preventDefault();
+    let scrollVelocity = 0;
+    let animationFrame;
 
-        // Multiply scroll delta to make it more reactive
-        const scrollAmount = e.deltaY * 1.5; // You can tweak this factor
-
-        el.scrollBy({
-          left: scrollAmount,
-          behavior: "auto",
-        });
+    const smoothScrollStep = () => {
+      if (Math.abs(scrollVelocity) < 0.1) {
+        scrollVelocity = 0;
+        return;
       }
+
+      el.scrollLeft += scrollVelocity;
+      scrollVelocity *= 0.8; // damping factor (momentum)
+      animationFrame = requestAnimationFrame(smoothScrollStep);
+    };
+
+    const handleWheel = (e) => {
+      if (e.deltaY === 0) return;
+
+      e.preventDefault();
+
+      // Scale delta for mouse wheels, leave small deltaY for touchpads
+      const isMouseWheel = Math.abs(e.deltaY) >= 50;
+
+      // Apply heavier scroll for mouse, lighter for touchpad
+      const delta = e.deltaY * (isMouseWheel ? 0.5 : 1);
+
+      scrollVelocity += delta;
+
+      cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(smoothScrollStep);
     };
 
     el.addEventListener("wheel", handleWheel, { passive: false });
-    return () => el.removeEventListener("wheel", handleWheel);
+
+    return () => {
+      el.removeEventListener("wheel", handleWheel);
+      cancelAnimationFrame(animationFrame);
+    };
   }, []);
-
-  // Seamless loop logic (no state change)
-  const handleScroll = () => {
-    const el = scrollRef.current;
-    if (!el || !realCount) return;
-
-    const totalRealWidth = cardWidth * realCount;
-    const scrollLeft = el.scrollLeft;
-
-    if (scrollLeft <= 0) {
-      el.scrollLeft = totalRealWidth;
-    } else if (scrollLeft >= totalRealWidth + CLONE_COUNT * cardWidth) {
-      el.scrollLeft = cardWidth * CLONE_COUNT;
-    }
-  };
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error loading data.</p>;
@@ -149,7 +203,11 @@ const Trending = () => {
       <div className={styles.scrollContainer} ref={scrollRef} onScroll={handleScroll}>
         <ul className={styles.sliderList}>
           {items.map((item, i) => (
-            <li className={styles.sliderItem} key={`${item.id}-${i}`}>
+            <li
+              className={styles.sliderItem}
+              key={`${item.id}-${i}`}
+              ref={i === 0 ? cardRef : null}
+            >
               <TrendingCard content={item} />
             </li>
           ))}

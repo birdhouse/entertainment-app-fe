@@ -25,6 +25,9 @@
   cursor: pointer;
   box-shadow: inset 0 0 0 1000px rgba(16, 20, 30, 0.3);
 
+  @include responsive(medium) {
+    height: 124px;
+  }
   button {
     @include absoluteCenter;
     border: none;

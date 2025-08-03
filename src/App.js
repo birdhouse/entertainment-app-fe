@@ -32,7 +32,7 @@ export default function App() {
   );
 }
 
-// interactions
+// page transitions
 
 /* PART 2 */
 
