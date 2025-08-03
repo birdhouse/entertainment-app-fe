@@ -1,0 +1,11 @@
+.homeInner {
+  @include flex(column, fs, fs, sp8);
+  width: 100%;
+  padding-left: 9%;
+
+  @include responsive(medium) {
+    width: 100%;
+    padding-left: 0%;
+    gap: 42px;
+  }
+}

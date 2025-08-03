@@ -1,6 +1,7 @@
-import RegularCard from "../components/RegularCard";
-import Trending from "../components/Trending";
+import RegularCard from "../components/regularCard/RegularCard";
+import Trending from "../components/trending/Trending";
 import { useGetTrendingQuery } from "../features/tmdbApi/tmdbApi";
+import styles from "./home.module.scss";
 
 const Home = () => {
   const { data, isLoading, isError } = useGetTrendingQuery({
@@ -15,20 +16,18 @@ const Home = () => {
   console.log(data);
 
   return (
-    <>
-      <>
-        <Trending />
-      </>
+    <section className={styles.homePage}>
+      <Trending />
 
-      <>
-        <h1>Home</h1>
+      <section className={styles.recommended}>
+        <h1 className="heading1">Recommended for you</h1>
         <ul>
           {data.results.map((item) => (
             <RegularCard content={item} key={crypto.randomUUID()} />
           ))}
         </ul>
-      </>
-    </>
+      </section>
+    </section>
   );
 };
 

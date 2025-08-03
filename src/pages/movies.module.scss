@@ -1,0 +1,21 @@
+.movies {
+  @include flex(column, fs, fs, sp9);
+  padding-right: 32px;
+  @include responsive(medium) {
+    padding-right: 16px;
+  }
+  ul {
+    width: 100%;
+
+    @include flex(row, fs, ce, sp9);
+    flex-wrap: wrap;
+
+    li {
+      @include flex(column, fs, fs, sp10);
+      gap: 8px;
+      flex: 1 1 250px;
+      max-width: "250px";
+      min-width: "200px";
+    }
+  }
+}

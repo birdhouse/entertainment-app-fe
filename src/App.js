@@ -32,9 +32,16 @@ export default function App() {
   );
 }
 
-// nav
-// styles
+// interactions
 
+/* PART 2 */
+
+/* 2.1 */
+// login
+// signup
+// bookmarks
+
+/* 2.2 */
 // backend
 // mongoDB
 // JWT auth

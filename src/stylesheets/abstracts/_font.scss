@@ -6,9 +6,11 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url(../../assets/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf) format("truetype");
-  font-weight: 400 700; /* Range for wght axis */
-  font-style: italic;
-}
+// @font-face {
+//   font-family: "JetBrains Mono";
+//   src: url(../../assets/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf) format("truetype");
+//   font-weight: 400 700; /* Range for wght axis */
+//   font-style: italic;
+// }
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");

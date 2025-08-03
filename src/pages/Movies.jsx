@@ -1,5 +1,7 @@
 import React from "react";
 import { useGetPopularMoviesQuery } from "../features/tmdbApi/tmdbApi";
+import RegularCard from "../components/regularCard/RegularCard";
+import styles from "./movies.module.scss";
 
 const Movies = () => {
   const { data, isLoading, isError } = useGetPopularMoviesQuery();
@@ -11,14 +13,14 @@ const Movies = () => {
   console.log(data);
 
   return (
-    <div>
-      <h1>Movies</h1>
+    <section className={styles.movies}>
+      <h1 className="heading1">Movies</h1>
       <ul>
         {data.results.map((item) => (
-          <li key={item.id}>{item.title || item.name}</li>
+          <RegularCard content={item} key={crypto.randomUUID()} />
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 

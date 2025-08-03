@@ -55,6 +55,10 @@ export const tmdbApi = createApi({
     getPopularDynamic: builder.query({
       query: ({ mediaType = "movie", page = 1 }) => `${mediaType}/popular?page=${page}`,
     }),
+    // get images
+    getMediaImages: builder.query({
+      query: ({ type, id }) => `${type}/${id}/images`,
+    }),
   }),
 });
 
@@ -67,4 +71,5 @@ export const {
   useGetPopularMoviesQuery,
   useGetPopularTvQuery,
   useGetPopularDynamicQuery,
+  useGetMediaImagesQuery,
 } = tmdbApi;

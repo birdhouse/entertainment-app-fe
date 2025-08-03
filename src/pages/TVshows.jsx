@@ -1,5 +1,7 @@
 import React from "react";
 import { useGetPopularTvQuery } from "../features/tmdbApi/tmdbApi";
+import styles from "./tvshows.module.scss";
+import RegularCard from "../components/regularCard/RegularCard";
 
 const TVshows = () => {
   const { data, isLoading, isError } = useGetPopularTvQuery();
@@ -11,14 +13,14 @@ const TVshows = () => {
   console.log(data);
 
   return (
-    <div>
-      <h1>TVshows</h1>
+    <section className={styles.tvshows}>
+      <h1 className="heading1">TV Shows</h1>
       <ul>
         {data.results.map((item) => (
-          <li key={item.id}>{item.title || item.name}</li>
+          <RegularCard content={item} key={crypto.randomUUID()} />
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 

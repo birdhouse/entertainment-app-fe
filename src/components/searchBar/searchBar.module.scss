@@ -1,0 +1,27 @@
+.searchBar {
+  @include flex(row, fs, ai, sp9);
+  width: 100%;
+  padding-right: 32px;
+  input {
+    width: 100%;
+    background-color: var(--appBackground);
+    border: none;
+    color: white;
+    font-size: 22px;
+
+    &::placeholder {
+      font-size: 22px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid #5a698f;
+
+      &::placeholder {
+        color: transparent;
+        font-size: 22px;
+      }
+    }
+  }
+}

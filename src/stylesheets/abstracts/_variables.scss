@@ -162,7 +162,7 @@ $themes: (
   //       --blocBg: get($colors, grey5),
   //       --divider: get($colors, grey6),
   //     )
-  //   ),,,,
+  //   ),,,,,
 );
 
 // --- Font Sizes Map ---
@@ -193,7 +193,7 @@ $fontSizes: (
   ),
   heading4: (
     heading: heading4,
-    color: --textPreset,
+    color: --cardLabelColor,
     weight: 300,
     line: 100%,
   ),

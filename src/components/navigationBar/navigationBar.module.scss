@@ -1,5 +1,19 @@
+@keyframes click-scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .navBar {
-  width: 8%;
+  //
+  position: fixed;
+  width: 6%;
   min-width: 80px;
   height: 90%;
   @include flex(column, sb, ce, sp8);
@@ -7,11 +21,12 @@
   background-color: var(--navBg);
   border-radius: 20px;
 
-  padding: 32px 28px;
+  padding: 32px 16px;
 
   @include responsive(medium) {
+    position: relative;
     flex-direction: row;
-    width: 100%;
+    width: 98%;
   }
 
   .navIconsAll {
@@ -19,7 +34,7 @@
     @include responsive(medium) {
       flex-direction: row;
       justify-content: space-between;
-      width: 63%;
+      width: 62%;
     }
 
     .navIcons {
@@ -27,6 +42,29 @@
 
       @include responsive(medium) {
         flex-direction: row;
+      }
+
+      svg {
+        transition: fill 200ms ease-in-out;
+      }
+
+      .defIcon {
+        cursor: pointer;
+        &:hover {
+          svg {
+            fill: #fc4747;
+          }
+        }
+        svg {
+          fill: #5a698f;
+        }
+      }
+
+      .iconActive {
+        svg {
+          fill: #fff;
+          animation: click-scale 200ms ease-in-out;
+        }
       }
     }
   }

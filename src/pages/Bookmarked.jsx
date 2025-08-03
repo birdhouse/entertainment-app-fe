@@ -3,7 +3,7 @@ import React from "react";
 const Bookmarked = () => {
   return (
     <div>
-      <h1>Bookmarked</h1>
+      <h1 className="heading1">Bookmarked</h1>
     </div>
   );
 };
