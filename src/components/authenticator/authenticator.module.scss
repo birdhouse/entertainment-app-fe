@@ -1,32 +1,40 @@
 .auth {
+  width: 100%;
   @include flex(column, fs, fs, sp8);
+  gap: 40px;
 }
 
 .inputAllCont {
   @include flex(column, fs, fs, sp8);
   width: 100%;
-  padding: 32px;
+
   .inputCont {
     width: inherit;
     border-bottom: 1px solid #5a698f;
+    transition: all 150ms ease-in-out;
+
+    &:has(input:focus) {
+      border-bottom: 1px solid #fff;
+    }
 
     &:focus {
       outline: none;
-      border-bottom: 1px solid #5a698f;
     }
     input {
       width: inherit;
-
       background-color: transparent;
       border: none;
       color: white;
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 300;
       caret-color: #ff0000;
       padding: 8px;
 
       &::placeholder {
-        font-size: 14px;
+        font-size: 15px;
+        font-weight: 300;
         color: rgba(255, 255, 255, 0.5);
+        transition: color 250ms ease-in-out;
       }
 
       &:focus {
@@ -34,9 +42,38 @@
 
         &::placeholder {
           color: transparent;
-          font-size: 22px;
         }
       }
+    }
+  }
+}
+
+.actionsCont {
+  width: 100%;
+  @include flex(column, fs, ce, sp10);
+
+  .loginButton {
+    width: inherit;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #fc4747;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #fff;
+      color: #10141e;
+    }
+  }
+
+  .signUp {
+    width: inherit;
+    @include flex(row, ce, ce, sp11);
+
+    .navLink {
+      color: #fc4747;
+      text-decoration: none;
     }
   }
 }

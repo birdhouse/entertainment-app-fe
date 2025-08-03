@@ -14,6 +14,9 @@ const Authenticator = () => {
         <div className={styles.inputCont}>
           <input type="password" id="password" placeholder="Password" />
         </div>
+        <div className={styles.inputCont}>
+          <input type="password" id="password" placeholder="Password" />
+        </div>
       </section>
       <section className={styles.actionsCont}>
         <button className={styles.loginButton}>Sign In</button>
