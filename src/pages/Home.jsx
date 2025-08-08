@@ -1,6 +1,6 @@
 import RegularCard from "../components/regularCard/RegularCard";
 import Trending from "../components/trending/Trending";
-import { useGetTrendingQuery } from "../features/tmdbApi/tmdbApi";
+import { useGetTrendingQuery } from "../services/tmdbApi/tmdbApi";
 import styles from "./home.module.scss";
 
 const Home = () => {

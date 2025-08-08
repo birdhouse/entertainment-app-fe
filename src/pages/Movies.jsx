@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetPopularMoviesQuery } from "../features/tmdbApi/tmdbApi";
+import { useGetPopularMoviesQuery } from "../services/tmdbApi/tmdbApi";
 import RegularCard from "../components/regularCard/RegularCard";
 import styles from "./movies.module.scss";
 

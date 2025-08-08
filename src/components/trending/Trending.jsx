@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useGetTrendingQuery } from "../../features/tmdbApi/tmdbApi";
+import { useGetTrendingQuery } from "../../services/tmdbApi/tmdbApi";
 import TrendingCard from "../trendingCard/TrendingCard";
 import styles from "./trending.module.scss";
 

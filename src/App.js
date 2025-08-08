@@ -9,12 +9,14 @@ import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Bookmarked from "./pages/Bookmarked";
 import HomeLayoutInner from "./layouts/HomeLayoutInner";
 import LoginLayout from "./layouts/LoginLayout";
+import RegisterLayout from "./layouts/RegisterLayout";
 
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route path="/signin" element={<LoginLayout />} />
+        <Route path="/signup" element={<RegisterLayout />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<HomeLayout />}>
             <Route element={<HomeLayoutInner />}>

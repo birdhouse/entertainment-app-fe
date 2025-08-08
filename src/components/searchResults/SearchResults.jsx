@@ -1,6 +1,6 @@
 import React from "react";
 import RegularCard from "../regularCard/RegularCard";
-import { useSearchMediaQuery } from "../../features/tmdbApi/tmdbApi";
+import { useSearchMediaQuery } from "../../services/tmdbApi/tmdbApi";
 import styles from "./searchResults.module.scss";
 const SearchResults = ({ searchTerm, mediaType }) => {
   const { data, isLoading } = useSearchMediaQuery(

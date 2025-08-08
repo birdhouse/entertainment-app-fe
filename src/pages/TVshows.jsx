@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetPopularTvQuery } from "../features/tmdbApi/tmdbApi";
+import { useGetPopularTvQuery } from "../services/tmdbApi/tmdbApi";
 import styles from "./tvshows.module.scss";
 import RegularCard from "../components/regularCard/RegularCard";
 
