@@ -38,13 +38,8 @@ export default function App() {
 // page transitions
 
 /* PART 2 */
-
 /* 2.1 */
-// login
-// signup
-// bookmarks
-
-/* 2.2 */
-// backend
-// mongoDB
-// JWT auth
+// get bookmarks
+// add bookmarks
+// user profile
+// logout
