@@ -2,9 +2,11 @@ import React from "react";
 import { useGetPopularTvQuery } from "../services/tmdbApi/tmdbApi";
 import styles from "./tvshows.module.scss";
 import RegularCard from "../components/regularCard/RegularCard";
+import useContentWithBookmarks from "../utils/useContentWithBookmarks";
 
 const TVshows = () => {
   const { data, isLoading, isError } = useGetPopularTvQuery();
+  const { contentWithBookmarkStatus } = useContentWithBookmarks(data);
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong.</p>;
@@ -16,7 +18,7 @@ const TVshows = () => {
     <section className={styles.tvshows}>
       <h1 className="heading1">TV Shows</h1>
       <ul>
-        {data.results.map((item) => (
+        {contentWithBookmarkStatus.map((item) => (
           <RegularCard content={item} key={crypto.randomUUID()} />
         ))}
       </ul>

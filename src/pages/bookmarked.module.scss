@@ -1,6 +1,7 @@
 .bookmarks {
   min-width: 280px;
-  width: 97%;
+
+  width: 100%;
   @include flex(column, fs, fs, sp9);
   // padding-right: 64px;
   @include responsive(medium) {

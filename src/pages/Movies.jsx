@@ -2,9 +2,11 @@ import React from "react";
 import { useGetPopularMoviesQuery } from "../services/tmdbApi/tmdbApi";
 import RegularCard from "../components/regularCard/RegularCard";
 import styles from "./movies.module.scss";
+import useContentWithBookmarks from "../utils/useContentWithBookmarks";
 
 const Movies = () => {
   const { data, isLoading, isError } = useGetPopularMoviesQuery();
+  const { contentWithBookmarkStatus } = useContentWithBookmarks(data);
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong.</p>;
@@ -16,7 +18,7 @@ const Movies = () => {
     <section className={styles.movies}>
       <h1 className="heading1">Movies</h1>
       <ul>
-        {data.results.map((item) => (
+        {contentWithBookmarkStatus.map((item) => (
           <RegularCard content={item} key={crypto.randomUUID()} />
         ))}
       </ul>
