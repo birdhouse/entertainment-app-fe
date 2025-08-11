@@ -39,7 +39,6 @@ export default function App() {
 
 /* PART 2 */
 /* 2.1 */
-// get bookmarks
-// add bookmarks
+// bookmarks for trending/tvshows/bookmark
 // user profile
 // logout

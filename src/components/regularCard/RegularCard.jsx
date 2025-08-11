@@ -3,22 +3,28 @@ import styles from "./regularCard.module.scss";
 import movieIcon from "../../assets/icon-category-movie.svg";
 import tvIcon from "../../assets/icon-category-tv.svg";
 import PlayButton from "../playButton/PlayButton";
+import BookmarkIcon from "../bookmarkIcon/BookmarkIcon";
 
 const RegularCard = ({ content }) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${content.poster_path}`;
-  console.log(typeof content.release_date, content.release_date, "release date");
+  // console.log(typeof content.release_date, content.release_date, "release date");
 
+  const bookmarkContent = {
+    tmdb_id: content.id, // assuming you'll need the id for bookmark functionality
+    poster_path: content.poster_path,
+    release_date: content.release_date,
+    first_air_date: content.first_air_date,
+    media_type: content.media_type,
+    adult: content.adult,
+    original_title: content.original_title,
+    original_name: content.original_name,
+  };
+
+  console.log("isbookmarked", content.isBookmarked);
   return (
     <li className="li">
       <div className={styles.cardBackground} style={{ backgroundImage: `url(${imageUrl})` }}>
-        <div className={styles.bookmarkIcon}>
-          <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg" stroke="#FFF">
-            <path
-              d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
-              stroke-width="1.5"
-            />
-          </svg>
-        </div>
+        <BookmarkIcon content={bookmarkContent} iconToggle={content.isBookmarked} />
         <PlayButton />
       </div>
 

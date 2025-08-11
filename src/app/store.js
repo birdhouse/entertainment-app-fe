@@ -1,15 +1,20 @@
 // src/app/store.js
 import { configureStore } from "@reduxjs/toolkit";
 import { tmdbApi } from "../services/tmdbApi/tmdbApi";
-import { authApi } from "../services/authApi"; // <-- our new RTK Query slice
-import authReducer from "../features/authSlice"; // <-- our new auth state slice
+import { authApi } from "../services/authApi";
+import { userApi } from "../services/userApi"; // ✅ import new API slice
+import authReducer from "../features/authSlice";
 
 export const store = configureStore({
   reducer: {
     [tmdbApi.reducerPath]: tmdbApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
-    auth: authReducer, // <-- for storing accessToken + user
+    [userApi.reducerPath]: userApi.reducer, // ✅ add reducer
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(tmdbApi.middleware).concat(authApi.middleware), // <-- add middleware for authApi
+    getDefaultMiddleware()
+      .concat(tmdbApi.middleware)
+      .concat(authApi.middleware)
+      .concat(userApi.middleware), // ✅ add middleware
 });
