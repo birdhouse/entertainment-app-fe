@@ -1,0 +1,60 @@
+.profilePage {
+  @include flex(column, fs, fs, sp9);
+  width: 100%;
+  padding-left: 9%;
+  height: 89vh;
+
+  @include responsive(medium) {
+    width: 100%;
+    padding-left: 0%;
+  }
+
+  p {
+    color: #5a698f;
+  }
+
+  .avatarUsername {
+    @include flex(column, fs, fs, sp8);
+
+    .usernameSec {
+      @include flex(column, fs, fs, sp10);
+    }
+  }
+
+  .bottom {
+    @include flex(column, sb, fs, sp6);
+    height: 100%;
+
+    .emailDate {
+      @include flex(column, fs, fs, sp8);
+
+      .secEmail {
+        @include flex(column, fs, fs, sp10);
+      }
+
+      .dateCreatedSec {
+        @include flex(column, fs, fs, sp10);
+      }
+    }
+
+    .exit {
+      @include flex(column, fs, fs, sp9);
+
+      .secLogout,
+      .logoutAllDevicesSec {
+        button {
+          background-color: transparent;
+          border: none;
+          color: #5a698f;
+          cursor: pointer;
+          font-size: 18px;
+          font-weight: 500;
+
+          &:hover {
+            color: #fc4747;
+          }
+        }
+      }
+    }
+  }
+}

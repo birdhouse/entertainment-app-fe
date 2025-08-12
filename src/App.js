@@ -10,6 +10,7 @@ import Bookmarked from "./pages/Bookmarked";
 import HomeLayoutInner from "./layouts/HomeLayoutInner";
 import LoginLayout from "./layouts/LoginLayout";
 import RegisterLayout from "./layouts/RegisterLayout";
+import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
   return (
@@ -19,6 +20,8 @@ export default function App() {
         <Route path="/signup" element={<RegisterLayout />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<HomeLayout />}>
+            <Route path="profile" element={<ProfilePage />} />
+
             <Route element={<HomeLayoutInner />}>
               <Route index element={<Home />} />
               <Route path="movie" element={<Movies />} />
@@ -35,9 +38,16 @@ export default function App() {
   );
 }
 
-// page transitions
+// 1.1 page transitions
+/* 
+  tutorial
+*/
 
-/* PART 2 */
-/* 2.1 */
-// user profile
-// logout
+// 1.2 input field validation
+/* 
+  login,register,search?
+*/
+
+// 1.4 micro interactioins
+
+// 2.0 reformat code

@@ -12,24 +12,24 @@ const Bookmarked = () => {
   const bookmarkedTV = bookmarks?.filter((b) => b.media_type === "tv") || [];
 
   return (
-    <div>
+    <div className={styles.bmCont}>
       <section className={styles.bookmarks}>
-        <h1>Bookmarked Movies</h1>
+        <h1 className="heading1">Bookmarked Movies</h1>
         <ul>
           {bookmarkedMovies.length > 0 ? (
             bookmarkedMovies.map((b) => <RegularCard content={b} key={b.id} />)
           ) : (
-            <p>No Movies saved</p>
+            <p className="heading5">No Movies saved</p>
           )}
         </ul>
       </section>
       <section className={styles.bookmarks}>
-        <h1>Bookmarked TV Series</h1>
+        <h1 className="heading1">Bookmarked TV Series</h1>
         <ul>
           {bookmarkedTV.length > 0 ? (
             bookmarkedTV.map((b) => <RegularCard content={b} key={b.id} />)
           ) : (
-            <p>No TV Series saved</p>
+            <p className="heading5">No TV Series saved</p>
           )}
         </ul>
       </section>
