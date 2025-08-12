@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGetTrendingQuery } from "../../services/tmdbApi/tmdbApi";
 import TrendingCard from "../trendingCard/TrendingCard";
 import styles from "./trending.module.scss";
+import useContentWithBookmarks from "../../utils/useContentWithBookmarks";
 
 const CLONE_COUNT = 5;
 
@@ -11,6 +12,10 @@ const Trending = () => {
     timeWindow: "day",
   });
 
+  const { contentWithBookmarkStatus } = useContentWithBookmarks(data);
+
+  console.log(contentWithBookmarkStatus);
+
   const scrollRef = useRef();
   const cardRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(0);
@@ -18,8 +23,8 @@ const Trending = () => {
   const realCount = data?.results?.length || 0;
 
   const getClonedItems = () => {
-    if (!data?.results) return [];
-    const items = data.results;
+    if (!contentWithBookmarkStatus) return [];
+    const items = contentWithBookmarkStatus;
     return [...items.slice(-CLONE_COUNT), ...items, ...items.slice(0, CLONE_COUNT)];
   };
   const items = getClonedItems();
@@ -135,22 +140,6 @@ const Trending = () => {
     };
   }, []);
 
-  // Wheel scroll enhancement
-  // useEffect(() => {
-  //   const el = scrollRef.current;
-  //   if (!el) return;
-
-  //   const handleWheel = (e) => {
-  //     if (e.deltaY !== 0) {
-  //       e.preventDefault();
-  //       const scrollAmount = e.deltaY * 1.5;
-  //       el.scrollBy({ left: scrollAmount, behavior: "auto" });
-  //     }
-  //   };
-
-  //   el.addEventListener("wheel", handleWheel, { passive: false });
-  //   return () => el.removeEventListener("wheel", handleWheel);
-  // }, []);
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;

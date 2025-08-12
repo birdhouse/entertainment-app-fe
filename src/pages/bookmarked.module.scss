@@ -11,8 +11,9 @@
   // padding-right: 64px;
   @include responsive(medium) {
     // padding-right: 16px;
-    width: 98%;
+    width: 100%;
   }
+
   ul {
     width: 100%;
 
@@ -22,22 +23,25 @@
     li {
       @include flex(column, fs, fs, sp10);
       gap: 8px;
-      flex: 0 1 320px;
-      // max-width: "280px";
+      flex: 1 1 300px;
+      // max-width: 320px;
       // min-width: "200px";
 
       @include responsive(medium) {
-        flex: 1 0 220px;
+        flex: 1 1 220px;
+        max-width: 220px;
       }
 
       // @include responsive(small) {
       //   flex: 1 0 200px;
       // }
     }
-    // &:has(li:only-child) {
-    //   li {
-    //     max-width: 432px !important;
-    //   }
-    // }
+    &:has(li:only-child) {
+      li {
+        // max-width: 432px !important;
+        // flex: 1 0 300px;
+        max-width: 320px;
+      }
+    }
   }
 }

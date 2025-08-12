@@ -2,6 +2,11 @@
   width: 100%;
   @include flex(column, fs, fs, sp8);
   gap: 40px;
+
+  .error {
+    font-size: 12px;
+    color: #fc4747;
+  }
 }
 
 .inputAllCont {
@@ -12,6 +17,15 @@
     width: inherit;
     border-bottom: 1px solid #5a698f;
     transition: all 150ms ease-in-out;
+
+    position: relative;
+
+    .error {
+      position: absolute;
+      bottom: -20px;
+      font-size: 12px;
+      color: #fc4747;
+    }
 
     &:has(input:focus) {
       border-bottom: 1px solid #fff;

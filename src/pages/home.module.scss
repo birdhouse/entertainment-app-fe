@@ -11,6 +11,28 @@
     // padding-right: 16px;
     width: 98%;
   }
+  // ul {
+  //   width: 100%;
+
+  //   @include flex(row, fs, ce, sp9);
+  //   flex-wrap: wrap;
+
+  //   li {
+  //     @include flex(column, fs, fs, sp10);
+  //     gap: 8px;
+  //     flex: 1 1 260px;
+  //     // max-width: "280px";
+  //     // min-width: "200px";
+
+  //     @include responsive(medium) {
+  //       flex: 1 0 220px;
+  //     }
+
+  //     // @include responsive(small) {
+  //     //   flex: 1 0 200px;
+  //     // }
+  //   }
+  // }
   ul {
     width: 100%;
 
@@ -20,7 +42,7 @@
     li {
       @include flex(column, fs, fs, sp10);
       gap: 8px;
-      flex: 1 1 260px;
+      flex: 1 1 300px;
       // max-width: "280px";
       // min-width: "200px";
 
@@ -32,5 +54,10 @@
       //   flex: 1 0 200px;
       // }
     }
+    // &:has(li:only-child) {
+    //   li {
+    //     max-width: 432px !important;
+    //   }
+    // }
   }
 }

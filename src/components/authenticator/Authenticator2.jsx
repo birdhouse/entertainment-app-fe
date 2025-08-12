@@ -4,27 +4,68 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../services/authApi";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../features/authSlice";
+import validator from "validator"; // ✅ add validator.js
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [formError, setFormError] = useState(null);
+
   const [register, { isLoading }] = useRegisterMutation();
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
-
   const navigate = useNavigate();
+
+  // ✅ Email validation handler
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    if (!validator.isEmail(value)) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  // ✅ Password validation handler
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+
+    const isLongEnough = value.length >= 8;
+    const hasLetter = /[A-Za-z]/.test(value);
+    const hasNumber = /\d/.test(value);
+
+    if (!isLongEnough) {
+      setPasswordError("Password must be at least 8 characters long.");
+    } else if (!hasLetter || !hasNumber) {
+      setPasswordError("Password must include at least one letter and one number.");
+    } else {
+      setPasswordError("");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
+    setFormError(null);
+
+    // Final check before submit
+    if (!validator.isEmail(email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+    if (passwordError) return;
+
     try {
       const data = await register({ name, email, password }).unwrap();
-      dispatch(setCredentials(data)); // { user, accessToken }
-      // TODO: redirect or update UI after successful registration
+      dispatch(setCredentials(data));
       navigate("/");
     } catch (err) {
-      setError(err.data?.message || "Failed to register");
+      setFormError(err.data?.message || "Failed to register");
     }
   };
 
@@ -50,9 +91,10 @@ const Register = () => {
             id="email"
             placeholder="Email address"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
           />
+          {emailError && <p className={styles.error}>{emailError}</p>}
         </div>
 
         <div className={styles.inputCont}>
@@ -61,15 +103,20 @@ const Register = () => {
             id="password"
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
           />
+          {passwordError && <p className={styles.error}>{passwordError}</p>}
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {formError && <p className={styles.error}>{formError}</p>}
 
         <section className={styles.actionsCont}>
-          <button className={styles.loginButton} type="submit" disabled={isLoading}>
+          <button
+            className={styles.loginButton}
+            type="submit"
+            disabled={isLoading || emailError || passwordError}
+          >
             {isLoading ? "Registering..." : "Register"}
           </button>
 
