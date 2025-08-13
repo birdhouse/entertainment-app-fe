@@ -2,22 +2,36 @@ import React from "react";
 import RegularCard from "../regularCard/RegularCard";
 import { useSearchMediaQuery } from "../../services/tmdbApi/tmdbApi";
 import styles from "./searchResults.module.scss";
+import { useGetBookmarksQuery } from "../../services/userApi";
+
 const SearchResults = ({ searchTerm, mediaType }) => {
-  const { data, isLoading } = useSearchMediaQuery(
-    { mediaType: mediaType.type, query: searchTerm },
-    { skip: !searchTerm }
+  console.log(mediaType);
+  // Always call both hooks
+  const searchQuery = useSearchMediaQuery(
+    { mediaType: mediaType?.type, query: searchTerm },
+    { skip: mediaType.type === "bookmark" || !searchTerm }
+  );
+  const bookmarksQuery = useGetBookmarksQuery(undefined, {
+    skip: mediaType.type !== "bookmark",
+  });
+
+  const filteredBookmarks = (bookmarksQuery.data || []).filter((bm) =>
+    (bm.original_title || bm.original_name || "").toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const isLoading = searchQuery.isLoading || bookmarksQuery.isLoading;
+  const data = mediaType.type !== "bookmark" ? searchQuery.data : filteredBookmarks;
+
+  console.log("bookmarks query", bookmarksQuery.data, "searchterm", searchTerm);
   if (isLoading) return <p>Loading...</p>;
-  console.log(data);
 
   return (
     <section className={styles.searchResults}>
       <h1>Search Results</h1>
       <ul>
-        {data.results.map((item) => (
-          <RegularCard content={item} />
-        ))}
+        {mediaType.type !== "bookmark"
+          ? data?.results?.map((item) => <RegularCard key={item.id} content={item} />)
+          : data.map((item) => <RegularCard key={item.id} content={item} />)}
       </ul>
     </section>
   );

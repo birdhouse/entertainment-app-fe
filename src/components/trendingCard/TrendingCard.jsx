@@ -17,11 +17,12 @@ const TrendingCard = ({ content }) => {
     adult: content.adult,
     original_title: content.original_title,
     original_name: content.original_name,
+    isBookmarked: content.isBookmarked,
   };
   return (
     <li>
       <div className={styles.cardBackground} style={{ backgroundImage: `url(${imageUrl})` }}>
-        <BookmarkIcon content={bookmarkContent} iconToggle={content.isBookmarked} />
+        <BookmarkIcon content={bookmarkContent} />
         <PlayButton />
 
         <div className={styles.contentInfo}>

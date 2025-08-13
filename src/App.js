@@ -43,10 +43,4 @@ export default function App() {
   tutorial
 */
 
-// 1.2 fix searchbar to also search  trough bookmarks
-// 2.3 bookmarks page bookmark icon fix
-
-// 1.4 micro interactions
-// searchbar, profile icon
-
 // 2.0 reformat code

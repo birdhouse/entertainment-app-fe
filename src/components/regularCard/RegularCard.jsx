@@ -10,7 +10,7 @@ const RegularCard = ({ content }) => {
   // console.log(typeof content.release_date, content.release_date, "release date");
 
   const bookmarkContent = {
-    tmdb_id: content.id, // assuming you'll need the id for bookmark functionality
+    tmdb_id: content.id || content.tmdb_id, // assuming you'll need the id for bookmark functionality
     poster_path: content.poster_path,
     release_date: content.release_date,
     first_air_date: content.first_air_date,
@@ -18,13 +18,14 @@ const RegularCard = ({ content }) => {
     adult: content.adult,
     original_title: content.original_title,
     original_name: content.original_name,
+    isBookmarked: content.isBookmarked,
   };
 
   console.log("isbookmarked", content.isBookmarked);
   return (
     <li className="li">
       <div className={styles.cardBackground} style={{ backgroundImage: `url(${imageUrl})` }}>
-        <BookmarkIcon content={bookmarkContent} iconToggle={content.isBookmarked} />
+        <BookmarkIcon content={bookmarkContent} />
         <PlayButton />
       </div>
 

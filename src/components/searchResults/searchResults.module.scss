@@ -1,4 +1,5 @@
 .searchResults {
+  width: 100%;
   @include flex(column, fs, fs, sp9);
   padding-right: 32px;
   @include responsive(medium) {
@@ -14,8 +15,8 @@
       @include flex(column, fs, fs, sp10);
       gap: 8px;
       flex: 1 1 250px;
-      max-width: "250px";
-      min-width: "200px";
+      max-width: 280px;
+      // min-width: "200px";
     }
   }
 }

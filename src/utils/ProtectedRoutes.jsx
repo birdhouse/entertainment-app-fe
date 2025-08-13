@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useRefreshMutation } from "../services/authApi";
@@ -28,7 +28,7 @@ const ProtectedRoutes = () => {
     };
 
     verifyRefreshToken();
-  }, [accessToken, dispatch, refresh]);
+  }, [accessToken, dispatch, refresh, navigate]);
 
   if (loading) return <p>Loading...</p>;
 

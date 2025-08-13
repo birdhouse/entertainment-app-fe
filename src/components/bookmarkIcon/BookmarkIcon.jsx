@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styles from "./bookmarkIcon.module.scss";
 import { useToggleBookmarkMutation } from "../../services/userApi";
 
-const BookmarkIcon = ({ content, iconToggle }) => {
+const BookmarkIcon = ({ content }) => {
   const [toggleBookmark] = useToggleBookmarkMutation();
-  const [toggle, setToggle] = useState(iconToggle);
+  const [toggle, setToggle] = useState(content.isBookmarked);
 
   const handleClick = async () => {
     try {
       // Call the mutation and wait for the response
+      content.isBookmarked = !content.isBookmarked;
       const result = await toggleBookmark(content);
 
       // Check if the mutation was successful and has data

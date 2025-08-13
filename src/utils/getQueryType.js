@@ -5,6 +5,9 @@ export const getQueryType = (pathname) => {
     type = pathname;
     if (pathname === "movie") {
       txt = "Movies";
+    } else if (pathname === "bookmarked") {
+      type = "bookmark";
+      txt = "Bookmarks";
     } else {
       txt = "TV Shows";
     }
