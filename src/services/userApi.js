@@ -20,7 +20,7 @@ export const userApi = createApi({
       providesTags: ["User"],
     }),
     getBookmarks: builder.query({
-      query: () => "/bookmark",
+      query: () => "/bookmarks",
       providesTags: ["Bookmarks"],
     }),
     toggleBookmark: builder.mutation({

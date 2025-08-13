@@ -8,6 +8,11 @@ const TVshows = () => {
   const { data, isLoading, isError } = useGetPopularTvQuery();
   const { contentWithBookmarkStatus } = useContentWithBookmarks(data);
 
+  const addedMediaType = contentWithBookmarkStatus.map((cont) => ({
+    ...cont,
+    media_type: "tv",
+  }));
+
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong.</p>;
   if (!data || !data.results) return <p>No data found.</p>;
@@ -18,7 +23,7 @@ const TVshows = () => {
     <section className={styles.tvshows}>
       <h1 className="heading1">TV Shows</h1>
       <ul>
-        {contentWithBookmarkStatus.map((item) => (
+        {addedMediaType.map((item) => (
           <RegularCard content={item} key={crypto.randomUUID()} />
         ))}
       </ul>

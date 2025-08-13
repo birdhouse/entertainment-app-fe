@@ -4,4 +4,6 @@
 
   border-radius: 20px;
   padding: 32px;
+
+  @include absoluteCenter;
 }
