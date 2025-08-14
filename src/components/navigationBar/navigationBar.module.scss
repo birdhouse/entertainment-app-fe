@@ -11,7 +11,6 @@
 }
 
 .navBar {
-  //
   position: fixed;
   width: 6%;
   min-width: 80px;
@@ -52,13 +51,13 @@
 
       .defIcon {
         cursor: pointer;
+        svg {
+          fill: #5a698f;
+        }
         &:active {
           svg {
             animation: click-scale 200ms ease-in-out;
           }
-        }
-        svg {
-          fill: #5a698f;
         }
         &:hover {
           svg {
@@ -70,7 +69,6 @@
       .iconActive {
         svg {
           fill: #fff;
-          // animation: click-scale 200ms ease-in-out;
         }
       }
     }

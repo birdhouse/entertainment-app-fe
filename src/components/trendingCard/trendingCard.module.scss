@@ -14,7 +14,6 @@
 .cardBackground {
   background-repeat: no-repeat;
   background-position: 0px -100px;
-  // height: 230px;
   height: clamp(140px, 25vw, 230px);
 
   border-radius: 8px;
@@ -47,7 +46,6 @@
   }
   &:hover {
     button {
-      // display: block;
       opacity: 1;
       pointer-events: all;
     }
@@ -55,8 +53,6 @@
 
   .bookmarkIcon {
     align-self: flex-end;
-    // padding: 8px;
-
     width: 33px;
     height: 33px;
     border-radius: 50%;
