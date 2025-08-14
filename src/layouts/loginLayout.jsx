@@ -1,11 +1,11 @@
 import React from "react";
-import Authenticator from "../components/authenticator/Authenticator";
 import styles from "./loginLayout.module.scss";
+import Login from "../components/authenticator/Login";
 
 const LoginLayout = () => {
   return (
     <section className={styles.login}>
-      <Authenticator />
+      <Login />
     </section>
   );
 };

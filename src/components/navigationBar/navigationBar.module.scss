@@ -3,7 +3,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(0.8);
+    transform: scale(0.7);
   }
   100% {
     transform: scale(1);
@@ -52,20 +52,25 @@
 
       .defIcon {
         cursor: pointer;
-        &:hover {
+        &:active {
           svg {
-            fill: #fc4747;
+            animation: click-scale 200ms ease-in-out;
           }
         }
         svg {
           fill: #5a698f;
+        }
+        &:hover {
+          svg {
+            fill: #fc4747;
+          }
         }
       }
 
       .iconActive {
         svg {
           fill: #fff;
-          animation: click-scale 200ms ease-in-out;
+          // animation: click-scale 200ms ease-in-out;
         }
       }
     }

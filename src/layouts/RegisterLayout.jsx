@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./loginLayout.module.scss";
-import Register from "../components/authenticator/Authenticator2";
+import Register from "../components/authenticator/Register";
 
 const RegisterLayout = () => {
   return (

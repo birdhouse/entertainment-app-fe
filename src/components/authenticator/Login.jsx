@@ -5,7 +5,7 @@ import { useLoginMutation } from "../../services/authApi";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../features/authSlice";
 
-const Authenticator = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, { isLoading }] = useLoginMutation();
@@ -70,4 +70,4 @@ const Authenticator = () => {
   );
 };
 
-export default Authenticator;
+export default Login;

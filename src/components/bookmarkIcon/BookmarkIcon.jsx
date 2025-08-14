@@ -19,7 +19,7 @@ const BookmarkIcon = ({ content }) => {
       }
     } catch (error) {
       console.error("Failed to toggle bookmark:", error);
-      // Optionally revert the UI state if the API call fails
+      // Revert the UI state if the API call fails
       setToggle((prev) => !prev);
     }
   };
