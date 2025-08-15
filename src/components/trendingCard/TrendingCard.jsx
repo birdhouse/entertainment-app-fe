@@ -28,7 +28,7 @@ const TrendingCard = ({ content }) => {
           <img
             src={imageUrl}
             alt={content.original_title || content.original_name}
-            loading="lazy"
+            // loading="lazy"
           />
         </div>
         <BookmarkIcon content={bookmarkContent} />

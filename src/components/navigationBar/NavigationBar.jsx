@@ -10,17 +10,15 @@ import AppLogo from "./AppLogo";
 const NavigationBar = () => {
   return (
     <section className={styles.navBar}>
-      <section className={styles.navIconsAll}>
-        <div className={styles.appLogo}>
-          <AppLogo />
-        </div>
-        <div className={styles.navIcons}>
-          <HomeLink />
-          <MovieLink />
-          <TVLink />
-          <BookmarkLink />
-        </div>
-      </section>
+      <div className={styles.appLogo}>
+        <AppLogo />
+      </div>
+      <div className={styles.navIcons}>
+        <HomeLink />
+        <MovieLink />
+        <TVLink />
+        <BookmarkLink />
+      </div>
 
       <ProfileLink />
     </section>

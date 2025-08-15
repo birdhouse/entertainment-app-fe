@@ -1,7 +1,7 @@
 .profilePage {
   @include flex(column, fs, fs, sp9);
   width: 100%;
-  padding-left: 9%;
+  padding-left: 8%;
   height: 89vh;
 
   @include responsive(medium) {

@@ -1,26 +1,33 @@
-import React, { useState } from "react";
 import styles from "./bookmarkIcon.module.scss";
-import { useToggleBookmarkMutation } from "../../services/userApi";
+import { useDispatch } from "react-redux";
+import { useToggleBookmarkMutation, userApi } from "../../services/userApi";
 
 const BookmarkIcon = ({ content }) => {
+  const dispatch = useDispatch();
   const [toggleBookmark] = useToggleBookmarkMutation();
-  const [toggle, setToggle] = useState(content.isBookmarked);
 
   const handleClick = async () => {
-    try {
-      // Call the mutation and wait for the response
-      content.isBookmarked = !content.isBookmarked;
-      const result = await toggleBookmark(content);
+    // Optimistic cache update
+    dispatch(
+      userApi.util.updateQueryData("getBookmarks", undefined, (draft) => {
+        const idx = draft.findIndex((b) => b.tmdb_id === content.tmdb_id);
+        if (idx >= 0) {
+          draft.splice(idx, 1); // remove if already bookmarked
+        } else {
+          draft.push({ tmdb_id: content.tmdb_id }); // add new bookmark
+        }
+      })
+    );
 
-      // Check if the mutation was successful and has data
-      if (result.data) {
-        // Update the toggle state based on the action returned from backend
-        setToggle(result.data.action);
-      }
+    try {
+      // Send update to server
+      content.isBookmarked = !content.isBookmarked;
+      await toggleBookmark(content).unwrap();
     } catch (error) {
       console.error("Failed to toggle bookmark:", error);
-      // Revert the UI state if the API call fails
-      setToggle((prev) => !prev);
+
+      // Rollback on error by forcing a re-fetch
+      dispatch(userApi.util.invalidateTags(["Bookmarks"]));
     }
   };
 
@@ -29,10 +36,9 @@ const BookmarkIcon = ({ content }) => {
       <input
         type="checkbox"
         name="bookmark"
-        id="bookmark"
-        checked={toggle}
-        onChange={() => {}} // Empty handler to prevent React warning
-        readOnly // Makes the checkbox controlled
+        id={`bookmark-${content.tmdb_id}`}
+        checked={content.isBookmarked}
+        readOnly
       />
       <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg" stroke="#FFF">
         <path

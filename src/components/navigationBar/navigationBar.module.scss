@@ -10,66 +10,72 @@
   }
 }
 
+.appLogo {
+  @include responsive(small) {
+    svg {
+      width: 25px;
+      height: 20px;
+    }
+  }
+}
+
 .navBar {
   position: fixed;
   width: 6%;
   min-width: 80px;
   max-width: 80px;
   height: 90%;
-  @include flex(column, sb, ce, sp8);
-
   background-color: var(--navBg);
   border-radius: 20px;
-
   padding: 32px 16px;
+  @include flex(column, fs, ce, sp7);
 
   @include responsive(medium) {
-    position: relative;
     flex-direction: row;
-    width: 98%;
-    height: 6%;
+    justify-content: space-between;
+    align-items: center;
+    width: 96.5% !important;
+    max-width: 97%;
+    height: 72px;
+    z-index: 999;
+  }
+  @include responsive(small) {
+    padding: 0 !important;
+    z-index: 999;
+    left: 0;
+    min-width: 100%;
+    border-radius: 0 !important;
+    padding: 16px !important;
   }
 
-  .navIconsAll {
-    @include flex(column, fs, ce, sp7);
+  .navIcons {
+    @include flex(column, fs, ce, sp9);
+
     @include responsive(medium) {
       flex-direction: row;
-      justify-content: space-between;
-      width: 62%;
     }
-
-    .navIcons {
-      @include flex(column, fs, ce, sp9);
-
-      @include responsive(medium) {
-        flex-direction: row;
-      }
-
+    svg {
+      transition: fill 200ms ease-in-out;
+    }
+    .defIcon {
+      cursor: pointer;
       svg {
-        transition: fill 200ms ease-in-out;
+        fill: #5a698f;
       }
-
-      .defIcon {
-        cursor: pointer;
+      &:active {
         svg {
-          fill: #5a698f;
-        }
-        &:active {
-          svg {
-            animation: click-scale 200ms ease-in-out;
-          }
-        }
-        &:hover {
-          svg {
-            fill: #fc4747;
-          }
+          animation: click-scale 200ms ease-in-out;
         }
       }
-
-      .iconActive {
+      &:hover {
         svg {
-          fill: #fff;
+          fill: #fc4747;
         }
+      }
+    }
+    .iconActive {
+      svg {
+        fill: #fff;
       }
     }
   }
@@ -79,9 +85,24 @@
     border-radius: 50%;
     padding: 2px;
     padding-left: 3px;
+    margin-top: auto !important;
     @include flex(row, ce, ce, sp0);
+    @include responsive(medium) {
+      margin-top: 0 !important;
+    }
+    @include responsive(small) {
+      padding-left: 2px;
+      padding-top: 2.5px;
+      img {
+        width: 24px !important;
+        height: 24px !important;
+      }
+    }
 
     &:focus {
+      background-color: #fc4747;
+    }
+    &:hover {
       background-color: #fc4747;
     }
 

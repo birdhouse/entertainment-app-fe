@@ -9,6 +9,9 @@
   @include responsive(medium) {
     width: 98%;
   }
+  @include responsive(small) {
+    width: 96%;
+  }
 
   ul {
     width: 100%;
@@ -22,6 +25,11 @@
 
       @include responsive(medium) {
         flex: 1 0 220px;
+      }
+
+      @include responsive(small) {
+        flex: 1 0 40%;
+        max-width: 60%;
       }
     }
   }

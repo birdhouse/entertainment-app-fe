@@ -2,11 +2,16 @@
   @include flex(column, fs, fs, sp8);
   width: 100%;
   padding-bottom: 46px;
-  padding-left: 9%;
+  padding-left: 8%;
 
   @include responsive(medium) {
     width: 100%;
     padding-left: 0%;
     gap: 42px;
+    padding-top: 96px;
+  }
+
+  @include responsive(small) {
+    gap: 24px;
   }
 }
