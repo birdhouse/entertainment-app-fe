@@ -5,6 +5,8 @@ import tvIcon from "../../assets/icon-category-tv.svg";
 import PlayButton from "../playButton/PlayButton";
 import BookmarkIcon from "../bookmarkIcon/BookmarkIcon";
 
+// style={{ backgroundImage: `url(${imageUrl})` }}
+
 const TrendingCard = ({ content }) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${content.poster_path}`;
 
@@ -20,8 +22,15 @@ const TrendingCard = ({ content }) => {
     isBookmarked: content.isBookmarked,
   };
   return (
-    <li>
-      <div className={styles.cardBackground} style={{ backgroundImage: `url(${imageUrl})` }}>
+    <div>
+      <div className={styles.cardBackground}>
+        <div className={styles.imgCont}>
+          <img
+            src={imageUrl}
+            alt={content.original_title || content.original_name}
+            loading="lazy"
+          />
+        </div>
         <BookmarkIcon content={bookmarkContent} />
         <PlayButton />
 
@@ -45,7 +54,7 @@ const TrendingCard = ({ content }) => {
           </div>
         </div>
       </div>
-    </li>
+    </div>
   );
 };
 

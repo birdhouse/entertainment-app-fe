@@ -1,33 +1,32 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useGetTrendingQuery } from "../../services/tmdbApi/tmdbApi";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+
 import TrendingCard from "../trendingCard/TrendingCard";
 import styles from "./trending.module.scss";
-import useContentWithBookmarks from "../../utils/useContentWithBookmarks";
 
-const CLONE_COUNT = 5;
+const CLONE_COUNT = 3;
 
-const Trending = () => {
-  const { data, isLoading, isError } = useGetTrendingQuery({
-    mediaType: "all",
-    timeWindow: "day",
-  });
+const Trending = ({ trendingData, isLoading, isError }) => {
+  // const { data, isLoading, isError } = useGetTrendingQuery({
+  //   mediaType: "all",
+  //   timeWindow: "day",
+  // });
 
-  const { contentWithBookmarkStatus } = useContentWithBookmarks(data);
+  // const { contentWithBookmarkStatus } = useContentWithBookmarks(data);
 
-  console.log(contentWithBookmarkStatus);
+  // console.log(contentWithBookmarkStatus);
 
   const scrollRef = useRef();
   const cardRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(0);
 
-  const realCount = data?.results?.length || 0;
+  const realCount = trendingData.length || 0;
 
   const getClonedItems = () => {
-    if (!contentWithBookmarkStatus) return [];
-    const items = contentWithBookmarkStatus;
+    if (!trendingData) return [];
+    const items = trendingData;
     return [...items.slice(-CLONE_COUNT), ...items, ...items.slice(0, CLONE_COUNT)];
   };
-  const items = getClonedItems();
+  const items = useMemo(getClonedItems, [trendingData]);
 
   // Dynamically get card width (responsive)
   useEffect(() => {

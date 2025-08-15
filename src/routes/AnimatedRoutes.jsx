@@ -2,18 +2,19 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageWrapper from "../components/pageWrapper/PageWrapper";
-
-import Home from "../pages/Home";
-import Movies from "../pages/Movies";
-import TVshows from "../pages/TVshows";
-import Bookmarked from "../pages/Bookmarked";
-import ProfilePage from "../pages/ProfilePage";
-
-import HomeLayout from "../layouts/HomeLayout";
-import HomeLayoutInner from "../layouts/HomeLayoutInner";
-import LoginLayout from "../layouts/LoginLayout";
-import RegisterLayout from "../layouts/RegisterLayout";
 import ProtectedRoutes from "./ProtectedRoutes";
+import { lazy } from "react";
+
+const Home = lazy(() => import("../pages/Home"));
+const Movies = lazy(() => import("../pages/Movies"));
+const TVshows = lazy(() => import("../pages/TVshows"));
+const Bookmarked = lazy(() => import("../pages/Bookmarked"));
+const ProfilePage = lazy(() => import("../pages/ProfilePage"));
+
+const HomeLayout = lazy(() => import("../layouts/HomeLayout"));
+const HomeLayoutInner = lazy(() => import("../layouts/HomeLayoutInner"));
+const LoginLayout = lazy(() => import("../layouts/LoginLayout"));
+const RegisterLayout = lazy(() => import("../layouts/RegisterLayout"));
 
 export default function AnimatedRoutes() {
   const location = useLocation();

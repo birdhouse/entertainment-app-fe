@@ -5,7 +5,7 @@ import tvIcon from "../../assets/icon-category-tv.svg";
 import PlayButton from "../playButton/PlayButton";
 import BookmarkIcon from "../bookmarkIcon/BookmarkIcon";
 
-const RegularCard = ({ content }) => {
+const RegularCard = ({ content, bmKey }) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${content.poster_path}`;
   // console.log(typeof content.release_date, content.release_date, "release date");
 
@@ -23,8 +23,15 @@ const RegularCard = ({ content }) => {
 
   console.log("isbookmarked", content.isBookmarked);
   return (
-    <li className="li">
-      <div className={styles.cardBackground} style={{ backgroundImage: `url(${imageUrl})` }}>
+    <li className="li" key={bmKey}>
+      <div className={styles.cardBackground}>
+        <div className={styles.imgCont}>
+          <img
+            src={imageUrl}
+            alt={content.original_title || content.original_name}
+            loading="lazy"
+          />
+        </div>
         <BookmarkIcon content={bookmarkContent} />
         <PlayButton />
       </div>

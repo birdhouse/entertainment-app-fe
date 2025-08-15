@@ -35,6 +35,7 @@
 
   .sliderItem {
     flex: 0 0 90%;
+    border-radius: 8px;
 
     @media (min-width: 374px) {
       flex: 0 0 65%;

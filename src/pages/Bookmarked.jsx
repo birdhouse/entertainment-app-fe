@@ -30,7 +30,7 @@ const Bookmarked = () => {
         <h1 className="heading1">Bookmarked TV Series</h1>
         <ul>
           {bookmarkedTV.length > 0 ? (
-            bookmarkedTV.map((b) => <RegularCard content={b} key={b.id} />)
+            bookmarkedTV.map((b) => <RegularCard content={b} bmKey={b.id} />)
           ) : (
             <p className="heading5">No TV Series saved</p>
           )}

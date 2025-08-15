@@ -1,6 +1,7 @@
 .homeInner {
   @include flex(column, fs, fs, sp8);
   width: 100%;
+  padding-bottom: 46px;
   padding-left: 9%;
 
   @include responsive(medium) {
