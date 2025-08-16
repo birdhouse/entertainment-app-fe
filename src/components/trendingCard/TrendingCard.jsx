@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./trendingCard.module.scss";
 import movieIcon from "../../assets/icon-category-movie.svg";
 import tvIcon from "../../assets/icon-category-tv.svg";
@@ -7,8 +6,6 @@ import BookmarkIcon from "../bookmarkIcon/BookmarkIcon";
 
 const TrendingCard = ({ content }) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${content.poster_path}`;
-
-  console.log("trendiing content", content);
 
   return (
     <div>

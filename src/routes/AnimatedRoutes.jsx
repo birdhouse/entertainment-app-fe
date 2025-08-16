@@ -5,16 +5,16 @@ import PageWrapper from "../components/pageWrapper/PageWrapper";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { lazy } from "react";
 
-const Home = lazy(() => import("../pages/Home"));
-const Movies = lazy(() => import("../pages/Movies"));
-const TVshows = lazy(() => import("../pages/TVshows"));
-const Bookmarked = lazy(() => import("../pages/Bookmarked"));
-const ProfilePage = lazy(() => import("../pages/ProfilePage"));
+const Home = lazy(() => import("../pages/home/Home"));
+const Movies = lazy(() => import("../pages/movies/Movies"));
+const TVshows = lazy(() => import("../pages/tvshows/TVshows"));
+const Bookmarked = lazy(() => import("../pages/bookmarked/Bookmarked"));
+const ProfilePage = lazy(() => import("../pages/profile/ProfilePage"));
 
-const HomeLayout = lazy(() => import("../layouts/HomeLayout"));
-const HomeLayoutInner = lazy(() => import("../layouts/HomeLayoutInner"));
-const LoginLayout = lazy(() => import("../layouts/LoginLayout"));
-const RegisterLayout = lazy(() => import("../layouts/RegisterLayout"));
+const HomeLayout = lazy(() => import("../layouts/outerLayoutWithNav/HomeLayout"));
+const HomeLayoutInner = lazy(() => import("../layouts/innerLayoutWithSearch/HomeLayoutInner"));
+const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
+const RegisterPage = lazy(() => import("../pages/auth/RegisterPage"));
 
 export default function AnimatedRoutes() {
   const location = useLocation();
@@ -27,7 +27,7 @@ export default function AnimatedRoutes() {
           path="/signin"
           element={
             <PageWrapper>
-              <LoginLayout />
+              <LoginPage />
             </PageWrapper>
           }
         />
@@ -35,7 +35,7 @@ export default function AnimatedRoutes() {
           path="/signup"
           element={
             <PageWrapper>
-              <RegisterLayout />
+              <RegisterPage />
             </PageWrapper>
           }
         />

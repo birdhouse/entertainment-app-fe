@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./authenticator.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../services/authApi";

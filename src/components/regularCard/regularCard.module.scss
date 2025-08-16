@@ -28,7 +28,7 @@
     position: absolute;
     inset: 0;
     background-color: rgba(16, 20, 30, 0.3);
-    z-index: 1; // sits above image, below content
+    z-index: 1;
   }
 
   @include responsive(medium) {

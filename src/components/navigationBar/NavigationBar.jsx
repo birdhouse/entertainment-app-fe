@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./navigationBar.module.scss";
 import HomeLink from "./navLinks/HomeLink";
 import MovieLink from "./navLinks/MovieLink";

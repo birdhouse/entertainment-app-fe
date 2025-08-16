@@ -1,12 +1,11 @@
 import React from "react";
-import { useGetBookmarksQuery } from "../services/userApi"; // your RTK query for bookmarks
+import { useGetBookmarksQuery } from "../services/userApi";
 
 function useContentWithBookmarks(content) {
   const { data: bookmarks = [], isLoading: bookmarksLoading, isError } = useGetBookmarksQuery();
 
   const isLoading = bookmarksLoading;
 
-  // Cross-reference content with bookmarks
   const contentWithBookmarkStatus = React.useMemo(() => {
     if (!content?.results || !bookmarks) return [];
 
@@ -14,7 +13,7 @@ function useContentWithBookmarks(content) {
 
     return content.results.map((cont) => ({
       ...cont,
-      isBookmarked: bookmarkedIds.has(cont.id), // assuming cont.id and bookmark ids are numbers
+      isBookmarked: bookmarkedIds.has(cont.id),
     }));
   }, [content, bookmarks]);
 

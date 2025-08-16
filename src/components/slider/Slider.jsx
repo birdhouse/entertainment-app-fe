@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import styles from "./slider.module.scss";
 
 import { useCardWidth } from "../../hooks/sliderHooks/useCardWidth";
@@ -11,16 +11,10 @@ const Slider = ({ data = [], cloneCount = 3, renderItem }) => {
   const scrollRef = useRef();
   const cardRef = useRef(null);
 
-  // 👇 cloning happens inside Slider
   const items = useClonedItems(data, cloneCount);
 
   const cardWidth = useCardWidth(cardRef);
-  const { handleScroll } = useInfiniteScroll(
-    scrollRef,
-    cardWidth,
-    data.length, // use *real* count, not cloned
-    cloneCount
-  );
+  const { handleScroll } = useInfiniteScroll(scrollRef, cardWidth, data.length, cloneCount);
 
   useDragScroll(scrollRef, styles.dragging);
   useWheelMomentum(scrollRef);

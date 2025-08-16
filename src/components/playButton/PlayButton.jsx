@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./playButton.module.scss";
 
 const PlayButton = () => {

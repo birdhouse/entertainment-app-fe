@@ -1,6 +1,6 @@
 // src/app/store.js
 import { configureStore } from "@reduxjs/toolkit";
-import { tmdbApi } from "../services/tmdbApi/tmdbApi";
+import { tmdbApi } from "../services/tmdbApi";
 import { authApi } from "../services/authApi";
 import { userApi } from "../services/userApi"; // ✅ import new API slice
 import authReducer from "../features/authSlice";

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./regularCard.module.scss";
 import movieIcon from "../../assets/icon-category-movie.svg";
 import tvIcon from "../../assets/icon-category-tv.svg";

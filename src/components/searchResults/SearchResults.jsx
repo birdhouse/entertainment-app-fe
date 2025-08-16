@@ -1,5 +1,5 @@
 import RegularCard from "../regularCard/RegularCard";
-import { useSearchMediaQuery } from "../../services/tmdbApi/tmdbApi";
+import { useSearchMediaQuery } from "../../services/tmdbApi";
 import styles from "./searchResults.module.scss";
 import { useGetBookmarksQuery } from "../../services/userApi";
 import useContentWithBookmarks from "../../hooks/useContentWithBookmarks";
