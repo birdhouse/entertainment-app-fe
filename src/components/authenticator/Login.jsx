@@ -20,7 +20,6 @@ const Login = () => {
     try {
       const data = await login({ email, password }).unwrap();
       dispatch(setCredentials(data)); // { user, accessToken }
-      // TODO: redirect or close modal, etc.
       navigate("/");
     } catch (err) {
       setError(err.data?.message || "Failed to login");

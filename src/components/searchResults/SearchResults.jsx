@@ -1,12 +1,10 @@
-import React from "react";
 import RegularCard from "../regularCard/RegularCard";
 import { useSearchMediaQuery } from "../../services/tmdbApi/tmdbApi";
 import styles from "./searchResults.module.scss";
 import { useGetBookmarksQuery } from "../../services/userApi";
+import useContentWithBookmarks from "../../hooks/useContentWithBookmarks";
 
 const SearchResults = ({ searchTerm, mediaType }) => {
-  console.log(mediaType);
-  // Always call both hooks
   const searchQuery = useSearchMediaQuery(
     { mediaType: mediaType?.type, query: searchTerm },
     { skip: mediaType.type === "bookmark" || !searchTerm }
@@ -22,15 +20,20 @@ const SearchResults = ({ searchTerm, mediaType }) => {
   const isLoading = searchQuery.isLoading || bookmarksQuery.isLoading;
   const data = mediaType.type !== "bookmark" ? searchQuery.data : filteredBookmarks;
 
+  // In your SearchResults component:
+  const { contentWithBookmarkStatus } = useContentWithBookmarks(
+    mediaType.type !== "bookmark" ? data : null
+  );
+
   console.log("bookmarks query", bookmarksQuery.data, "searchterm", searchTerm);
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <section className={styles.searchResults}>
-      <h1>Search Results</h1>
+      <h1 className="heading1">Search Results</h1>
       <ul>
         {mediaType.type !== "bookmark"
-          ? data?.results?.map((item) => <RegularCard key={item.id} content={item} />)
+          ? contentWithBookmarkStatus?.map((item) => <RegularCard key={item.id} content={item} />)
           : data.map((item) => <RegularCard key={item.id} content={item} />)}
       </ul>
     </section>

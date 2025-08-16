@@ -2,7 +2,7 @@ import React from "react";
 import { useGetBookmarksQuery } from "../services/userApi";
 import RegularCard from "../components/regularCard/RegularCard";
 import styles from "./bookmarked.module.scss";
-import useContentWithBookmarks from "../utils/useContentWithBookmarks";
+import useContentWithBookmarks from "../hooks/useContentWithBookmarks";
 
 const Bookmarked = () => {
   const { data: bookmarks, isLoading } = useGetBookmarksQuery();

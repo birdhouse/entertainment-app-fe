@@ -7,21 +7,7 @@ import BookmarkIcon from "../bookmarkIcon/BookmarkIcon";
 
 const RegularCard = ({ content, bmKey }) => {
   const imageUrl = `https://image.tmdb.org/t/p/w500${content.poster_path}`;
-  // console.log(typeof content.release_date, content.release_date, "release date");
 
-  const bookmarkContent = {
-    tmdb_id: content.id || content.tmdb_id, // assuming you'll need the id for bookmark functionality
-    poster_path: content.poster_path,
-    release_date: content.release_date,
-    first_air_date: content.first_air_date,
-    media_type: content.media_type,
-    adult: content.adult,
-    original_title: content.original_title,
-    original_name: content.original_name,
-    isBookmarked: content.isBookmarked,
-  };
-
-  console.log("isbookmarked", content.isBookmarked);
   return (
     <li className="li" key={bmKey}>
       <div className={styles.cardBackground}>
@@ -32,7 +18,7 @@ const RegularCard = ({ content, bmKey }) => {
             loading="lazy"
           />
         </div>
-        <BookmarkIcon content={bookmarkContent} />
+        <BookmarkIcon content={content} />
         <PlayButton />
       </div>
 

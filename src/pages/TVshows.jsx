@@ -2,7 +2,7 @@ import React from "react";
 import { useGetPopularTvQuery } from "../services/tmdbApi/tmdbApi";
 import styles from "./tvshows.module.scss";
 import RegularCard from "../components/regularCard/RegularCard";
-import useContentWithBookmarks from "../utils/useContentWithBookmarks";
+import useContentWithBookmarks from "../hooks/useContentWithBookmarks";
 
 const TVshows = () => {
   const { data, isLoading, isError } = useGetPopularTvQuery();

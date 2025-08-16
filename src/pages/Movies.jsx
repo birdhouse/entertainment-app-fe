@@ -2,7 +2,7 @@ import React from "react";
 import { useGetPopularMoviesQuery } from "../services/tmdbApi/tmdbApi";
 import RegularCard from "../components/regularCard/RegularCard";
 import styles from "./movies.module.scss";
-import useContentWithBookmarks from "../utils/useContentWithBookmarks";
+import useContentWithBookmarks from "../hooks/useContentWithBookmarks";
 
 const Movies = () => {
   const { data, isLoading, isError } = useGetPopularMoviesQuery();

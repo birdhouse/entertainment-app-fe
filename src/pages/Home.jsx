@@ -2,8 +2,9 @@ import { useMemo, Suspense, lazy } from "react";
 import RegularCard from "../components/regularCard/RegularCard";
 // import Trending from "../components/trending/Trending";
 import { useGetTrendingQuery } from "../services/tmdbApi/tmdbApi";
-import useContentWithBookmarks from "../utils/useContentWithBookmarks";
+import useContentWithBookmarks from "../hooks/useContentWithBookmarks";
 import styles from "./home.module.scss";
+import usePreloadImage from "../hooks/usePreloadImage";
 
 const Trending = lazy(() => import("../components/trending/Trending"));
 
@@ -14,6 +15,12 @@ const Home = () => {
   });
 
   const { contentWithBookmarkStatus } = useContentWithBookmarks(useMemo(() => data, [data]));
+
+  // // 👇 Preload first trending image (likely LCP)
+  // const firstImage = contentWithBookmarkStatus?.[0]?.poster_path
+  //   ? `https://image.tmdb.org/t/p/w500${contentWithBookmarkStatus[0].poster_path}`
+  //   : null;
+  // usePreloadImage(firstImage);
 
   if (isLoading)
     return (
@@ -55,6 +62,7 @@ const Home = () => {
           isError={isError}
         />
       </Suspense>
+      {/* <Trending trendingData={contentWithBookmarkStatus} isLoading={isLoading} isError={isError} /> */}
 
       <section className={styles.recommended}>
         <h1 className="heading1">Recommended for you</h1>

@@ -15,7 +15,10 @@
       @include flex(column, fs, fs, sp10);
       gap: 8px;
       flex: 1 1 250px;
-      max-width: 280px;
+
+      @include responsive(small) {
+        max-width: 46%;
+      }
     }
   }
 }

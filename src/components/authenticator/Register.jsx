@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../services/authApi";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../features/authSlice";
-import validator from "validator"; // ✅ add validator.js
+import validator from "validator";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -19,7 +19,6 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // ✅ Email validation handler
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -31,7 +30,6 @@ const Register = () => {
     }
   };
 
-  // ✅ Password validation handler
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
