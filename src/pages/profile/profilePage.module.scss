@@ -9,6 +9,10 @@
     padding-left: 0%;
   }
 
+  @include responsive(small) {
+    padding-top: 10%;
+  }
+
   p {
     color: #5a698f;
   }
