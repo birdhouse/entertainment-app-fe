@@ -13,10 +13,12 @@ body {
 
   &:has(.login) {
     padding: 0;
+    width: 100%;
   }
 
   &:has([class^="loginLayout_login"]) {
     height: 100vh;
+    width: 100%;
   }
 
   @include responsive(medium) {

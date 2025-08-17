@@ -6,4 +6,7 @@
   padding: 32px;
 
   @include absoluteCenter;
+  @include responsive(small) {
+    width: 96%;
+  }
 }
