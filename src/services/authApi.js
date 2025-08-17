@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Helper to include cookies in fetch calls
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/auth",
+  baseUrl: `${process.env.REACT_APP_API_URL}/api/auth`,
   credentials: "include", // <-- this sends HttpOnly refreshToken cookie
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
