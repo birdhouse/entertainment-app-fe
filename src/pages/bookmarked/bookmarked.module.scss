@@ -8,9 +8,7 @@
 
   width: 100%;
   @include flex(column, fs, fs, sp9);
-  // padding-right: 64px;
   @include responsive(medium) {
-    // padding-right: 16px;
     width: 100%;
   }
 
@@ -24,7 +22,6 @@
       @include flex(column, fs, fs, sp10);
       gap: 8px;
       flex: 1 1 300px;
-      // max-width: 320px;
       max-width: 33%;
 
       @include responsive(medium) {
@@ -33,18 +30,16 @@
       }
 
       @include responsive(small) {
-        max-width: 100%;
+        flex: 1 0 40%;
+        max-width: 60%;
       }
-
-      // @include responsive(small) {
-      //   flex: 1 0 200px;
-      // }
     }
     &:has(li:only-child) {
       li {
-        // max-width: 432px !important;
-        // flex: 1 0 300px;
         max-width: 320px;
+        @include responsive(small) {
+          max-width: 40%;
+        }
       }
     }
   }
